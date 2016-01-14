@@ -4622,6 +4622,9 @@ ngSoundManager.factory('angularPlayer', ['$rootScope', '$log',
                     }
                 }
             },
+            songLike: function() {
+                console.log('liking it');
+            },
             addTrack: function(track) {
                 //check if track itself is valid and if its url is playable
                 if (!this.isTrackValid) {
@@ -5000,6 +5003,26 @@ ngSoundManager.factory('socketFactory', ['angularPlayer', '$log', function (angu
             }
         }
     }]);
+
+//*******************************************************
+// Nikola's code
+ngSoundManager.directive('upVote', ['angularPlayer', function (angularPlayer) {
+    return {
+        restrict: "EA",
+        scope: {
+            song: "=upVote"
+        },
+        link: function (scope, element, attrs) {
+            element.bind('click', function (event) {
+                scope.song.votes += 1;
+                console.log('i voted');
+                console.log(scope.song);
+            });
+        }
+    };
+}]);
+
+//*******************************************************
     
 
 
